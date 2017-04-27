@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="jcs_dialog.css">
+	<title>Document</title>
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="jcs_dialog.js"></script>
+</head>
+<body>
+	<!-- <div class="jcs_decision">
+		<p class="jcs_decision_tit">您确认要使用赠送解锁文章吗？</p>
+		<p class="jcs_decision_true">确定</p>
+		<p class="jcs_decision_false">取消</p>
+	</div> -->
+	<div id="test" style="width:1px;height:17px;background:#0f0;">0%</div>
+	<input type="button" value="Run" id="run"/>
+ 	<div class="jcs_dialog"><div class="j_inner"><img src="cai.png" alt="">
+	<span class="j_move"></span></div></div>
+</body>
+<script>
+	(function() {
+	    var lastTime = 0;
+	    var vendors = ['ms', 'moz', 'webkit', 'o'];
+	    for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+	        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+	        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+	    }
+	    if (!window.requestAnimationFrame) window.requestAnimationFrame = function(callback, element) {
+	        var currTime = new Date().getTime();
+	        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+	        var id = window.setTimeout(function() {
+	            callback(currTime + timeToCall);
+	        }, timeToCall);
+	        lastTime = currTime + timeToCall;
+	        return id;
+	    };
+	    if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function(id) {
+	        clearTimeout(id);
+	    };
+	}());
+	/*var start = null;
+	var ele = document.getElementById("test");
+	var progress = 0;
+	 
+	function step(timestamp) {
+	    progress++;
+	    ele.style.width = progress + "%";
+	    ele.innerHTML=progress + "%";
+	    if (progress < 100) {
+	        requestAnimationFrame(step);
+	    }
+	}
+	requestAnimationFrame(step);*/
+	/*document.getElementById("run").addEventListener("click", function() {
+	    ele.style.width = "1px";
+	    progress = 0;
+	    requestAnimationFrame(step);
+	}, false);*/
+
+	var i = 0;
+	function start(timestamp){
+		i++;
+		if(i>=76){
+			i = 0;
+			
+		}
+		document.querySelector('.j_move').style.height=i+'px';
+		document.querySelector('.j_move').style.backgroundPosition='0 '+(-76+i)+'px';
+		requestAnimationFrame(start);
+	}
+	requestAnimationFrame(start);
+</script>
+</html>
